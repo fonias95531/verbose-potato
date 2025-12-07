@@ -11,20 +11,9 @@ std::vector<std::string> readStringsFromFile(const std::string& filename) {
 
 // Функция №2: Вывод строк на экран
 void printStringsToConsole(const std::vector<std::string>& strings) {
-    if (strings.empty()) {
-        std::cout << "No strings to display." << std::endl;
-        return;
+    for (const auto& str : strings) {
+        std::cout << str << std::endl;
     }
-    
-    // Выводим заголовок
-    std::cout << "=== Displaying " << strings.size() << " lines ===" << std::endl;
-    
-    // Выводим строки с номерами
-    for (size_t i = 0; i < strings.size(); i++) {
-        std::cout << i + 1 << ". " << strings[i] << std::endl;
-    }
-    
-    std::cout << "=== End of list ===" << std::endl;
 }
 
 // Функция №3: Запись строк в файл
@@ -34,14 +23,12 @@ void writeStringsToFile(const std::vector<std::string>& strings, const std::stri
 
 // Каркас программы с последовательным вызовом функций
 int main() {
-    std::vector<std::string> testData = {
-        "Завтрак в 8:00",
-        "Обед в 13:00",
-        "Ужин в 19:00",
-        "Сон в 23:00"
-    };
+    const std::string inputFilename = "input.txt"; //указать полный путь к файлу
+    const std::string outputFilename = "output.txt"; //аналогично выше
     
-    printStringsToConsole(testData);
+    std::vector<std::string> strings = readStringsFromFile(inputFilename);
+    printStringsToConsole(strings);
+    writeStringsToFile(strings, outputFilename);
     
     return 0;
 }
