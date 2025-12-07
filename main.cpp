@@ -1,11 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 // Функция №1: Чтение строк из файла в вектор
 std::vector<std::string> readStringsFromFile(const std::string& filename) {
-    // TODO: Реализовать чтение из файла
     std::vector<std::string> result;
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        return result;
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        result.push_back(line);
+    }
+    file.close();
     return result;
 }
 
