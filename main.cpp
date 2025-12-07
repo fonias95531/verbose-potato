@@ -1,11 +1,26 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 // Функция №1: Чтение строк из файла в вектор
 std::vector<std::string> readStringsFromFile(const std::string& filename) {
-    // TODO: Реализовать чтение из файла
     std::vector<std::string> result;
+    
+    // Открываем файл
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        return result;
+    }
+    
+    // Временный код для тестирования
+    std::cout << "DEBUG: Testing read function..." << std::endl;
+    result.push_back("Test line 1");
+    result.push_back("Test line 2");
+    result.push_back("Test line 3");
+    
+    file.close();
     return result;
 }
 
