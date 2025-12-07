@@ -28,17 +28,31 @@ void printStringsToConsole(const std::vector<std::string>& strings) {
 
 // Функция №3: Запись строк в файл
 void writeStringsToFile(const std::vector<std::string>& strings, const std::string& filename) {
-    // TODO: Реализовать запись в файл
+    
+    std::ofstream outputFile(filename);
+    
+    if (!outputFile) {
+        std::cerr << "Error: Cannot open file '" << filename << "' for writing" << std::endl;
+        return;
+    }
+    
+    for (const auto& str : strings) {
+        outputFile << str << std::endl;
+    }
+    
+    outputFile.close();
+
 }
 
 // Каркас программы с последовательным вызовом функций
 int main() {
-    const std::string inputFilename = "input.txt"; //указать полный путь к файлу
-    const std::string outputFilename = "output.txt"; //аналогично выше
+
+    const std::string inputFilename = "input.txt";
+    const std::string outputFilename = "output.txt";
     
     std::vector<std::string> strings = readStringsFromFile(inputFilename);
     printStringsToConsole(strings);
     writeStringsToFile(strings, outputFilename);
-    
+
     return 0;
 }
