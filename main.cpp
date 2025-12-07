@@ -7,6 +7,11 @@
 std::vector<std::string> readStringsFromFile(const std::string& filename) {
     std::vector<std::string> result;
     
+    // Проверяем, не пустое ли имя файла
+    if (filename.empty()) {
+        std::cerr << "Error: Filename is empty!" << std::endl;
+        return result;
+    }
     // Открываем файл
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -16,15 +21,18 @@ std::vector<std::string> readStringsFromFile(const std::string& filename) {
     
     // Чтение строк из файла
     std::string line;
+    int lineCount = 0;
     while (std::getline(file, line)) {
         result.push_back(line);
+        lineCount++;
     }
-    
     file.close();
 
-    std::cout << "DEBUG: Read " << result.size() << " lines from '" 
-              << filename << "'" << std::endl;
-
+    if (lineCount > 0) {
+        std::cout << "Info: Successfully read " << lineCount << " lines from '" << filename << "'" << std::endl;
+    } else {
+        std::cout << "Warning: File '" << filename << "' is empty" << std::endl;
+    }
     return result;
 }
 
