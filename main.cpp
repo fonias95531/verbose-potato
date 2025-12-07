@@ -12,6 +12,9 @@ std::vector<std::string> readStringsFromFile(const std::string& filename) {
 // Функция №2: Вывод строк на экран
 void printStringsToConsole(const std::vector<std::string>& strings) {
     // TODO: Реализовать вывод на экран
+    for (size_t i = 0; i < strings.size(); i++) {
+        std::cout << strings[i] << std::endl;
+    }
 }
 
 // Функция №3: Запись строк в файл
@@ -21,17 +24,23 @@ void writeStringsToFile(const std::vector<std::string>& strings, const std::stri
 
 // Каркас программы с последовательным вызовом функций
 int main() {
-    // Имена файлов
+    // ВРЕМЕННЫЕ ТЕСТОВЫЕ ДАННЫЕ - УДАЛИТЬ ПЕРЕД СЛИЯНИЕМ!
+    std::vector<std::string> testData = {
+        "Первая строка для теста",
+        "Вторая строка",
+        "Третья строка программы",
+        "Четвертая строка вывода",
+        "Пятая последняя строка"
+    };
+    
     const std::string inputFilename = "input.txt";
     const std::string outputFilename = "output.txt";
     
-    // Функция №1: Чтение строк из файла
-    std::vector<std::string> strings = readStringsFromFile(inputFilename);
+    // ВРЕМЕННО: используем тестовые данные
+    // std::vector<std::string> strings = readStringsFromFile(inputFilename);
+    std::vector<std::string> strings = testData;
     
-    // Функция №2: Вывод строк на экран
     printStringsToConsole(strings);
-    
-    // Функция №3: Запись строк в файл
     writeStringsToFile(strings, outputFilename);
     
     return 0;
