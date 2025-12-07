@@ -18,47 +18,30 @@ void printStringsToConsole(const std::vector<std::string>& strings) {
 // Функция №3: Запись строк в файл
 void writeStringsToFile(const std::vector<std::string>& strings, const std::string& filename) {
     
-     if (strings.empty()) {
-        std::cout << "Warning: No data to write to file." << std::endl;
-        return;
-    }
-
-    if (filename.empty()) {
-        std::cerr << "Error: Output filename cannot be empty!" << std::endl;
-        return;
-    }
-
     std::ofstream outputFile(filename);
     
-    if (!outputFile.is_open()) {
-        std::cerr << "Error: Failed to open file '" << filename 
-                  << "' for writing. Check permissions." << std::endl;
+    if (!outputFile) {
+        std::cerr << "Error: Cannot open file '" << filename << "' for writing" << std::endl;
         return;
     }
-
-    int writtenCount = 0;
+    
     for (const auto& str : strings) {
-        outputFile << str << "\n";  // \n вместо endl для производительности
-        writtenCount++;
+        outputFile << str << std::endl;
     }
     
     outputFile.close();
-    
-    std::cout << "Successfully wrote " << writtenCount 
-              << " lines to file: " << filename << std::endl;
 
 }
 
 // Каркас программы с последовательным вызовом функций
 int main() {
 
-    std::vector<std::string> data1 = {"Line 1", "Line 2", "Line 3"};
-    writeStringsToFile(data1, "test1.txt");
+    const std::string inputFilename = "input.txt";
+    const std::string outputFilename = "output.txt";
     
-    std::vector<std::string> data2;
-    writeStringsToFile(data2, "test2.txt");
-
-    writeStringsToFile(data1, "");
+    std::vector<std::string> strings = readStringsFromFile(inputFilename);
+    printStringsToConsole(strings);
+    writeStringsToFile(strings, outputFilename);
 
     return 0;
 }
