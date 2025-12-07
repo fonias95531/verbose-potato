@@ -17,56 +17,48 @@ void printStringsToConsole(const std::vector<std::string>& strings) {
 
 // Функция №3: Запись строк в файл
 void writeStringsToFile(const std::vector<std::string>& strings, const std::string& filename) {
+    
+     if (strings.empty()) {
+        std::cout << "Warning: No data to write to file." << std::endl;
+        return;
+    }
+
+    if (filename.empty()) {
+        std::cerr << "Error: Output filename cannot be empty!" << std::endl;
+        return;
+    }
 
     std::ofstream outputFile(filename);
     
-    if (!outputFile) {
-        std::cerr << "Error: Cannot open file for writing: " << filename << std::endl;
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: Failed to open file '" << filename 
+                  << "' for writing. Check permissions." << std::endl;
         return;
     }
-    
+
+    int writtenCount = 0;
     for (const auto& str : strings) {
-        outputFile << str << std::endl;
+        outputFile << str << "\n";  // \n вместо endl для производительности
+        writtenCount++;
     }
     
     outputFile.close();
+    
+    std::cout << "Successfully wrote " << writtenCount 
+              << " lines to file: " << filename << std::endl;
+
 }
 
 // Каркас программы с последовательным вызовом функций
 int main() {
-    // Имена файлов
-    const std::string inputFilename = "input.txt";
-    const std::string outputFilename = "test_output.txt";
-    
-    std::vector<std::string> testData = {
-        "Первая строка для записи",
-        "Вторая строка",
-        "Третья строка с текстом",
-        "",
-        "Пустая строка выше",
-        "Последняя строка файла"
-    };
 
-     writeStringsToFile(testData, outputFilename);
+    std::vector<std::string> data1 = {"Line 1", "Line 2", "Line 3"};
+    writeStringsToFile(data1, "test1.txt");
+    
+    std::vector<std::string> data2;
+    writeStringsToFile(data2, "test2.txt");
 
-    std::cout << "File written. Checking contents..." << std::endl;
-    std::ifstream checkFile(outputFilename);
-    std::string line;
-    while (std::getline(checkFile, line)) {
-        std::cout << "Read: " << line << std::endl;
-    }
-    checkFile.close();
-    
-    return 0;
+    writeStringsToFile(data1, "");
 
-    // Функция №1: Чтение строк из файла
-    std::vector<std::string> strings = readStringsFromFile(inputFilename);
-    
-    // Функция №2: Вывод строк на экран
-    printStringsToConsole(strings);
-    
-    // Функция №3: Запись строк в файл
-    writeStringsToFile(strings, outputFilename);
-    
     return 0;
 }
