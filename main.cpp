@@ -14,13 +14,17 @@ std::vector<std::string> readStringsFromFile(const std::string& filename) {
         return result;
     }
     
-    // Временный код для тестирования
-    std::cout << "DEBUG: Testing read function..." << std::endl;
-    result.push_back("Test line 1");
-    result.push_back("Test line 2");
-    result.push_back("Test line 3");
+    // Чтение строк из файла
+    std::string line;
+    while (std::getline(file, line)) {
+        result.push_back(line);
+    }
     
     file.close();
+
+    std::cout << "DEBUG: Read " << result.size() << " lines from '" 
+              << filename << "'" << std::endl;
+
     return result;
 }
 
@@ -37,8 +41,8 @@ void writeStringsToFile(const std::vector<std::string>& strings, const std::stri
 // Каркас программы с последовательным вызовом функций
 int main() {
     // Имена файлов
-    const std::string inputFilename = "input.txt";
-    const std::string outputFilename = "output.txt";
+    const std::string inputFilename = "C:\\Projects\\verbose-potato\\input.txt";
+    const std::string outputFilename = "C:\\Projects\\verbose-potato\\output.txt";
     
     // Функция №1: Чтение строк из файла
     std::vector<std::string> strings = readStringsFromFile(inputFilename);
