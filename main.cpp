@@ -11,7 +11,13 @@ std::vector<std::string> readStringsFromFile(const std::string& filename) {
 
 // Функция №2: Вывод строк на экран
 void printStringsToConsole(const std::vector<std::string>& strings) {
-    // TODO: Реализовать вывод на экран
+    // Проверяем, не пустой ли вектор
+    if (strings.empty()) {
+        std::cout << "No strings to display." << std::endl;
+        return;  // выходим из функции
+    }
+    
+    // Выводим все строки
     for (size_t i = 0; i < strings.size(); i++) {
         std::cout << strings[i] << std::endl;
     }
@@ -24,24 +30,20 @@ void writeStringsToFile(const std::vector<std::string>& strings, const std::stri
 
 // Каркас программы с последовательным вызовом функций
 int main() {
-    // ВРЕМЕННЫЕ ТЕСТОВЫЕ ДАННЫЕ - УДАЛИТЬ ПЕРЕД СЛИЯНИЕМ!
-    std::vector<std::string> testData = {
-        "Первая строка для теста",
-        "Вторая строка",
-        "Третья строка программы",
-        "Четвертая строка вывода",
-        "Пятая последняя строка"
-    };
+    // Тест 1: обычный вектор
+    std::vector<std::string> test1 = {"Line 1", "Line 2", "Line 3"};
+    std::cout << "Test 1 - Normal vector:" << std::endl;
+    printStringsToConsole(test1);
     
-    const std::string inputFilename = "input.txt";
-    const std::string outputFilename = "output.txt";
+    // Тест 2: пустой вектор
+    std::vector<std::string> test2;
+    std::cout << "\nTest 2 - Empty vector:" << std::endl;
+    printStringsToConsole(test2);
     
-    // ВРЕМЕННО: используем тестовые данные
-    // std::vector<std::string> strings = readStringsFromFile(inputFilename);
-    std::vector<std::string> strings = testData;
-    
-    printStringsToConsole(strings);
-    writeStringsToFile(strings, outputFilename);
+    // Тест 3: вектор с одной строкой
+    std::vector<std::string> test3 = {"Single line"};
+    std::cout << "\nTest 3 - Single line:" << std::endl;
+    printStringsToConsole(test3);
     
     return 0;
 }
