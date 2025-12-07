@@ -5,14 +5,25 @@
 
 // Функция №1: Чтение строк из файла в вектор
 std::vector<std::string> readStringsFromFile(const std::string& filename) {
-    // TODO: Реализовать чтение из файла
     std::vector<std::string> result;
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        return result;
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        result.push_back(line);
+    }
+    file.close();
     return result;
 }
 
 // Функция №2: Вывод строк на экран
 void printStringsToConsole(const std::vector<std::string>& strings) {
-    // TODO: Реализовать вывод на экран
+    for (const auto& str : strings) {
+        std::cout << str << std::endl;
+    }
 }
 
 // Функция №3: Запись строк в файл
